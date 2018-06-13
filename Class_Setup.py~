@@ -1,0 +1,171 @@
+class Jelly:
+    '''
+    An object in this class represents a single diagram in an expansion of the jellyfish relations.
+    The calculations will reutrn a sum of jelly objects.
+    '''
+    def __init__(self, scalar, n):
+        self.scalar = scalar
+        self.circles = []
+        self.strings = []
+        self.n = n
+
+    def add_circle(self, circle):
+        if len(circle.endpoints) == 2*self.n:
+            self.circles.append(circle)
+        elif len(circle.endpoints) > 2*self.n:
+            raise TypeError('This circle has too many strings')
+        elif len(circle.endpoints) < 2*self.n:
+            raise TypeError('This circle has too few strings')
+
+
+
+    def add_string(self, string):
+        if string.start.used:
+            raise TypeError('The starting point of this string is already used')
+        if string.end.used:
+            raise TypeError('The ending point of this string is already used')
+        if not string.start.color == string.color:
+            raise TypeError('This string and its endpoints have different colors')
+        string.start.used = True
+        string.end.used = True
+        self.strings.append(string)
+
+
+class Circle:
+    '''
+    An object in this class represents a single "U" or "U*" circle in a jellyfish diagram.
+    '''
+    def __init__(self, starred, n):
+        self.starred = starred
+        self.endpoints = []
+
+        if starred == True:
+            for i in range(2*n):
+                if i % 2 == 0:
+                    self.endpoints.append(Endpoint(self, i, 'Blue'))
+                else:
+                    self.endpoints.append(Endpoint(self, i, 'Red'))
+        if starred == False:
+            for i in range(2*n):
+                if i % 2 == 1:
+                    self.endpoints.append(Endpoint(self, i, 'Blue'))
+                else:
+                    self.endpoints.append(Endpoint(self, i, 'Red'))
+
+
+class String:
+    '''
+    An object in this class represents a single string, with two endpoints and a color.
+    '''
+    def __init__(self, start, end, color):
+        self.start = start
+        self.end = end
+        self.color = color
+        if start == end:
+            raise TypeError("A string cannot have the same start and end point")
+        if not start.color == end.color:
+            raise TypeError('The endpoints of this string have different colors')
+
+
+class Endpoint:
+    '''
+    An object in this class represents an endpoint, with a target (a circle object or 'Bottom'),
+    a number (which position on the target), a color ("Red" or "Blue"), and a Boolean for if the endpoint has a string yet.
+    '''
+    def __init__(self, target, number, color):
+        self.target = target
+        self.number = number
+        self.color = color
+        self.used = False
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
